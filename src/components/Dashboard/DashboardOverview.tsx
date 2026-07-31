@@ -9,10 +9,12 @@ import {
   ShieldAlert,
   ArrowUpRight,
   CheckCircle2,
-  FileText
+  FileText,
+  Download
 } from 'lucide-react';
 import type { Patient, BPMeasurement, BPReminder } from '../../types';
 import { evaluateBP } from '../../services/bpAdviceEngine';
+import { exportLogsAsCSV } from '../../services/storage';
 import { exportLogsAsPDF } from '../../services/pdfReportGenerator';
 
 interface DashboardOverviewProps {
@@ -133,6 +135,15 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
           >
             <FileText className="w-4 h-4 text-rose-600" />
             <span className="hidden sm:inline">Export PDF</span>
+          </button>
+
+          <button
+            onClick={() => activePatient && exportLogsAsCSV(patientMeasurements, [activePatient])}
+            className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-xs transition-all"
+            title="Download CSV Spreadsheet for Physicians"
+          >
+            <Download className="w-4 h-4 text-teal-600" />
+            <span className="hidden sm:inline">Export CSV</span>
           </button>
 
           <button
