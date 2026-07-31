@@ -1,6 +1,7 @@
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import type { Patient, BPMeasurement } from '../types';
+import { evaluateBP } from './bpAdviceEngine';
 
 export const createPDFDocument = (
   measurements: BPMeasurement[],
@@ -112,7 +113,58 @@ export const createPDFDocument = (
     margin: { left: 14, right: 14 },
   });
 
-  // 4. Detailed BP Logs Table
+  const statsTableY = (doc as any).lastAutoTable.finalY || 70;
+  let nextSectionY = statsTableY + 8;
+
+  // 4. Warm & Friendly Clinical Advice Box
+  if (latest) {
+    const advice = evaluateBP(latest.systolic, latest.diastolic);
+    const boxY = statsTableY + 5;
+    
+    // Calculate required box height based on summary text wrapping & steps count
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    const summaryLines = doc.splitTextToSize(advice.summaryAdvice, 174);
+    const textHeight = summaryLines.length * 4;
+    const stepsHeight = advice.detailedSteps.length * 4;
+    const totalBoxHeight = 14 + textHeight + stepsHeight;
+
+    // Draw Rose Callout Card
+    doc.setFillColor(255, 241, 242); // Rose-50
+    doc.setDrawColor(254, 205, 211); // Rose-200
+    doc.setLineWidth(0.3);
+    doc.roundedRect(14, boxY, 182, totalBoxHeight, 3, 3, 'FD');
+
+    // Title
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9.5);
+    doc.setTextColor(159, 18, 57); // Rose-900
+    doc.text(`Friendly Health Analysis: ${advice.category} Range`, 18, boxY + 6);
+
+    // Warm Advice Text
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    doc.setTextColor(30, 41, 59); // Slate-800
+    doc.text(summaryLines, 18, boxY + 11);
+
+    // Recommended Action Steps
+    const stepsHeaderY = boxY + 11 + textHeight + 1;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.setTextColor(190, 18, 60); // Rose-700
+    doc.text('Recommended Personal Care Steps:', 18, stepsHeaderY);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(51, 65, 85); // Slate-700
+    advice.detailedSteps.forEach((step, idx) => {
+      doc.text(`• ${step}`, 20, stepsHeaderY + 4 + (idx * 4));
+    });
+
+    nextSectionY = boxY + totalBoxHeight + 8;
+  }
+
+  // 5. Detailed BP Logs Table
   const tableRows = patientMeasurements.map(m => {
     const patientName = patients.find(p => p.id === m.patientId)?.name || 'Profile';
     return [
@@ -131,15 +183,13 @@ export const createPDFDocument = (
     ? ['Date & Time', 'BP (mmHg)', 'AHA Category', 'Pulse', 'MAP/PP', 'Arm / Posture', 'Notes & Tags']
     : ['Date & Time', 'Profile', 'BP (mmHg)', 'AHA Category', 'Pulse', 'MAP/PP', 'Arm / Posture', 'Notes & Tags'];
 
-  const lastTableY = (doc as any).lastAutoTable.finalY || 70;
-
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
   doc.setTextColor(...darkTextColor);
-  doc.text('Measurement History Log', 14, lastTableY + 8);
+  doc.text('Measurement History Log', 14, nextSectionY);
 
   autoTable(doc, {
-    startY: lastTableY + 12,
+    startY: nextSectionY + 4,
     head: [tableHeaders],
     body: tableRows,
     theme: 'striped',
@@ -223,7 +273,6 @@ export const shareLogsAsPDF = async (
       return false;
     }
   } else {
-    // Fallback to direct download
     doc.save(filename);
     return false;
   }
