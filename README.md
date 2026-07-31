@@ -17,32 +17,75 @@
 
 ---
 
-## 🛠️ Technology Stack
+## 📱 How to Use BPTracker (User Guide & Screenshots)
 
-- **Core**: React 19, TypeScript 5.8, Vite 6
-- **Styling**: Tailwind CSS 4, Lucide Icons, Clean Light Design System
-- **Hosting**: Cloudflare Pages (`public/_redirects` SPA rules)
+### 1. 👤 Managing Health Profiles
+
+Switch between yourself and family members, set custom target blood pressure ranges, and add personal notes:
+- Click **Profiles** in the navigation bar to open the **Health Profiles Directory**.
+- Click any profile card to instantly switch active users.
+- Use **+ Add Health Profile** to create a new profile.
+
+![Health Profiles Directory](docs/screenshots/profiles.png)
 
 ---
 
-## 💻 Local Development Setup
+### 2. 📝 Logging Blood Pressure Readings
 
-```bash
-# Clone the repository
-git clone https://github.com/lyvuong/BPTracker.git
+Log new measurements with instant clinical feedback:
+- Click the **+ Log BP** button in the header or dashboard.
+- Enter **Systolic**, **Diastolic**, and **Pulse** values.
+- Select **Arm Used** (Left/Right) and **Body Position** (Sitting, Lying, Standing).
+- Select context tags (e.g., `#Morning`, `#Fasting`, `#Post-Medication`, `#Resting`).
+- Review live **AHA/ACC Clinical Evaluation** feedback before saving.
 
-# Navigate to project directory
-cd BPTracker
+![Log BP Reading Modal](docs/screenshots/log_bp_modal.png)
 
-# Install dependencies
-npm install
+---
 
-# Start local dev server
-npm run dev
+### 3. 📊 Dashboard Overview & Health Advice
 
-# Build for production
-npm run build
-```
+View a comprehensive snapshot of active profile vitals:
+- **Latest Measurement**: Displays your most recent reading with color-coded AHA category badges.
+- **7-Day Rolling Average**: Automatically calculates your 7-day average blood pressure and pulse.
+- **Friendly Health Advice**: Provides actionable clinical guidance and recommended lifestyle steps based on AHA/ACC guidelines.
+- **Hypertensive Crisis Warning**: Prominently alerts you if a reading exceeds 180/120 mmHg.
+
+![Dashboard Overview](docs/screenshots/dashboard.png)
+
+---
+
+### 4. 📋 Reviewing Logs & Exporting Physician Reports
+
+Review, search, and export blood pressure history:
+- Filter entries by **Profile**, **AHA Category**, or **Date / Systolic Sort**.
+- Search notes and context tags in real time using the search bar.
+- Click **Export CSV** to download a spreadsheet formatted for doctor visits.
+- Click **Print Report** for a clean printout of your logs.
+
+![BP Logs History](docs/screenshots/bp_logs.png)
+
+---
+
+### 5. 📈 Clinical Analytics & Diurnal Variation
+
+Analyze blood pressure trends and cardiac indicators:
+- **Category Distribution**: View progress bars showing percentage breakdown across Normal, Elevated, Stage 1, Stage 2, and Crisis ranges.
+- **Diurnal Surge Variation**: Compare morning (5 AM – 12 PM) vs. evening (5 PM – 11 PM) average systolic pressures.
+- **Clinical Explanations**: Learn about **Mean Arterial Pressure (MAP)** and **Pulse Pressure** indicators.
+
+![Clinical Analytics](docs/screenshots/analytics.png)
+
+---
+
+### 6. ⏰ Setting Alarms & Medication Reminders
+
+Never miss a measurement or medication dose:
+- Navigate to the **Reminders** tab.
+- Click **+ Add Schedule Reminder**.
+- Set daily alarm times for morning/evening BP checks or medication intake (with optional dosage details).
+
+![Reminders & Alarms](docs/screenshots/reminders.png)
 
 ---
 
@@ -94,6 +137,35 @@ Cloudflare Pages automatically reads `public/_redirects` included in this reposi
 /*  /index.html  200
 ```
 This ensures client-side React routes and direct page refreshes resolve cleanly without `404 Not Found` errors.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Core**: React 19, TypeScript 5.8, Vite 6
+- **Styling**: Tailwind CSS 4, Lucide Icons, Clean Light Design System
+- **Hosting**: Cloudflare Pages (`public/_redirects` SPA rules)
+
+---
+
+## 💻 Local Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/lyvuong/BPTracker.git
+
+# Navigate to project directory
+cd BPTracker
+
+# Install dependencies
+npm install
+
+# Start local dev server
+npm run dev
+
+# Build for production
+npm run build
+```
 
 ---
 
