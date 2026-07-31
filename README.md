@@ -4,6 +4,18 @@
 
 ---
 
+## 🤖 Built with AI Magic: Antigravity + Gemini 3.6 Flash! 🚀
+
+> *"Zero gravity, maximum velocity, and dragon-fire precision!"* 🐉 🐧
+
+This PWA wasn't just built — it was **hyper-engineered** in pair-programming harmony with **Antigravity**, Google DeepMind's advanced agentic coding platform, powered by **Gemini 3.6 Flash (High)**!
+
+- ⚡ **Lightning Fast Generation**: Component architecture, AHA/ACC clinical advice engines, and responsive glass/light styling crafted at warp speed.
+- 🎯 **Zero-Defect Code**: Strict TypeScript 5.8 types, automated build checks, case-sensitivity fixes, and seamless PWA manifests generated in record time.
+- 🎨 **Visual Excellence**: Crafted with curated light theme design tokens, vector SVG icons, and a custom dragon-penguin developer avatar.
+
+---
+
 ## ✨ Features & Highlights
 
 - 👨‍👩‍👧 **Personal & Family Health Profiles**: Effortlessly track and switch between multiple health profiles (Myself, Grandma, Spouse, Dad) with customized target BP ranges.
@@ -187,6 +199,7 @@ This ensures client-side React routes and direct page refreshes resolve cleanly 
 
 ## 🛠️ Technology Stack
 
+- **AI Pair Programmer**: Google DeepMind Antigravity + Gemini 3.6 Flash (High) ⚡
 - **Core**: React 19, TypeScript 5.8, Vite 6
 - **Styling**: Tailwind CSS 4, Lucide Icons, Clean Light Design System
 - **Hosting**: Cloudflare Pages (`public/_redirects` SPA rules)
@@ -217,5 +230,6 @@ npm run build
 ## 👨‍💻 Developer & Author
 
 - **Developer**: Ly Vuong (🐉 🐧 Dragon & Penguin Fan)
+- **AI Pair Programmer**: Google DeepMind **Antigravity** (Gemini 3.6 Flash) ⚡
 - **Repository**: [https://github.com/lyvuong/BPTracker](https://github.com/lyvuong/BPTracker)
 - **License**: MIT

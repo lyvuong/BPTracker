@@ -14,6 +14,8 @@ export const AboutPage: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const TECH_STACK = [
+    { name: 'Antigravity AI', category: 'AI Pair Programmer', desc: 'Google DeepMind Agentic Coding Platform 🚀' },
+    { name: 'Gemini 3.6 Flash', category: 'LLM Engine', desc: 'Lightning Fast Zero-Defect Code & Architecture ⚡' },
     { name: 'React 19', category: 'UI Framework', desc: 'Concurrent State & Component Architecture' },
     { name: 'Vite 6', category: 'Build Tooling', desc: 'Fast ESM Production Bundling & HMR' },
     { name: 'TypeScript 5.8', category: 'Language', desc: 'Strict Clinical Type Definitions' },
@@ -143,6 +145,16 @@ export const AboutPage: React.FC = () => {
             <p className="text-xs text-slate-600 leading-relaxed">
               Designed for personal health tracking, family care, and caregivers. Engineered with privacy-first client-side data isolation, physician CSV export, and offline PWA capabilities.
             </p>
+
+            <div className="bg-gradient-to-r from-rose-50 to-pink-50 p-3.5 rounded-xl border border-rose-200 mt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span className="text-xs font-bold text-rose-900 flex items-center gap-1.5 flex-wrap">
+                <span>🤖 Pair Programmed with:</span>
+                <span className="font-extrabold text-rose-600 font-mono">Google DeepMind Antigravity × Gemini 3.6 Flash</span>
+              </span>
+              <span className="text-[11px] font-black text-rose-700 bg-white px-2.5 py-0.5 rounded-md border border-rose-200 shadow-xs font-mono self-start sm:self-auto shrink-0">
+                ⚡ Zero-Gravity Speed
+              </span>
+            </div>
           </div>
         </div>
       </div>
