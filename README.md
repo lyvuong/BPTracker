@@ -12,8 +12,53 @@
 - ⏰ **Medication & BP Measurement Alarms**: Set scheduled daily BP check alarms and medication dosage reminders.
 - 💾 **Doctor-Ready CSV & JSON Data Export**: Export full CSV logs formatted for physicians, or backup/restore complete app states via JSON.
 - 🎨 **Clean Light Theme UI & Scalable SVG Icon**: Crisp accessible interface, fast touch controls, and high-DPI SVG vector icons.
-- ⚡ **Offline-First PWA Capabilities**: Instant loading, service worker support, and offline LocalStorage fallback.
+- 📲 **Installable Progressive Web App (PWA)**: Add to Home Screen on iOS, Android, and Desktop with offline access.
 - 🚀 **Cloudflare Pages Deployment**: Optimized SPA build configuration for global edge deployment on Cloudflare Pages.
+
+---
+
+## 📲 How to Install BPTracker on Mobile & Desktop
+
+As a **Progressive Web Application (PWA)**, BPTracker can be installed directly onto your mobile home screen or desktop without needing an App Store or Google Play Store download.
+
+### 🍎 Installing on iOS (iPhone & iPad - Safari)
+
+1. Open **Safari** on your iPhone or iPad and navigate to your hosted app URL (e.g. `https://bptracker.pages.dev`).
+2. Tap the **Share** button (the square icon with an upward arrow at the bottom toolbar).
+3. Scroll down the Share menu and tap **Add to Home Screen**.
+4. Confirm the app title (`BPTracker`) and tap **Add** in the top-right corner.
+5. The BPTracker icon will now appear on your iPhone/iPad Home Screen and launch in full-screen standalone mode!
+
+---
+
+### 🤖 Installing on Android (Google Chrome, Brave, Edge)
+
+#### Method 1: In-App Install Banner
+1. Open the app URL in **Chrome** on your Android device.
+2. Tap the floating **Install BPTracker App** banner that appears at the bottom of the screen.
+3. Tap **Install** when prompted.
+
+#### Method 2: Chrome Menu
+1. Tap the **three dots menu (⋮)** in the top-right corner of Chrome.
+2. Tap **Install app** or **Add to Home screen**.
+3. Confirm by tapping **Install**.
+4. BPTracker will be added to your Android App Drawer and Home Screen.
+
+---
+
+### 💻 Installing on Desktop (Google Chrome & Microsoft Edge)
+
+1. Open the app URL in **Chrome** or **Edge** on your computer.
+2. Click the **Install Icon** (computer screen with a down arrow) located on the right side of the browser address bar (URL bar).
+3. Click **Install** in the confirmation popup.
+4. BPTracker will open as a standalone window and create a desktop/start menu shortcut.
+
+---
+
+### ⚡ Benefits of Installing BPTracker as a PWA
+- **100% Offline Functionality**: Read and log blood pressure measurements anytime, even without cell service or Wi-Fi.
+- **Native App Feel**: Opens fullscreen without browser bars or URL controls.
+- **Privacy & Speed**: Launches instantly with zero external network dependencies for local data.
 
 ---
 
