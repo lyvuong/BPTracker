@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { ClipboardList, Search, Plus, Download, FileText, Printer, Edit2, Trash2 } from 'lucide-react';
+import { ClipboardList, Search, Plus, Download, FileText, Printer, Edit2, Trash2, Share2 } from 'lucide-react';
 import type { Patient, BPMeasurement } from '../../types';
 import { evaluateBP } from '../../services/bpAdviceEngine';
-import { exportLogsAsCSV } from '../../services/storage';
-import { exportLogsAsPDF } from '../../services/pdfReportGenerator';
+import { exportLogsAsCSV, shareLogsAsCSV } from '../../services/storage';
+import { exportLogsAsPDF, shareLogsAsPDF } from '../../services/pdfReportGenerator';
 
 interface MeasurementHistoryProps {
   measurements: BPMeasurement[];
@@ -68,6 +68,14 @@ export const MeasurementHistory: React.FC<MeasurementHistoryProps> = ({
     exportLogsAsPDF(filteredMeasurements, patients, selectedPatientFilter === 'all' ? undefined : selectedPatientFilter);
   };
 
+  const handleSharePDF = () => {
+    shareLogsAsPDF(filteredMeasurements, patients, selectedPatientFilter === 'all' ? undefined : selectedPatientFilter);
+  };
+
+  const handleShareCSV = () => {
+    shareLogsAsCSV(filteredMeasurements, patients);
+  };
+
   const handlePrint = () => {
     window.print();
   };
@@ -91,12 +99,30 @@ export const MeasurementHistory: React.FC<MeasurementHistoryProps> = ({
 
         <div className="flex flex-wrap items-center gap-2 no-print">
           <button
+            onClick={handleSharePDF}
+            className="flex items-center gap-1.5 bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-xs transition-all active:scale-95"
+            title="Share PDF Report via Native Share Sheet (Email, WhatsApp, AirDrop)"
+          >
+            <Share2 className="w-4 h-4" />
+            <span>Share PDF</span>
+          </button>
+
+          <button
             onClick={handleExportPDF}
             className="flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold px-3.5 py-2 rounded-xl border border-rose-200 transition-all shadow-xs"
             title="Download Doctor-Ready PDF Report"
           >
             <FileText className="w-4 h-4 text-rose-600" />
             Export PDF
+          </button>
+
+          <button
+            onClick={handleShareCSV}
+            className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-200 transition-all"
+            title="Share CSV Spreadsheet"
+          >
+            <Share2 className="w-4 h-4 text-teal-600" />
+            <span>Share CSV</span>
           </button>
 
           <button

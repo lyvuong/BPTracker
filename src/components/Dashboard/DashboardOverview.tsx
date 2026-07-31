@@ -10,12 +10,13 @@ import {
   ArrowUpRight,
   CheckCircle2,
   FileText,
-  Download
+  Download,
+  Share2
 } from 'lucide-react';
 import type { Patient, BPMeasurement, BPReminder } from '../../types';
 import { evaluateBP } from '../../services/bpAdviceEngine';
-import { exportLogsAsCSV } from '../../services/storage';
-import { exportLogsAsPDF } from '../../services/pdfReportGenerator';
+import { exportLogsAsCSV, shareLogsAsCSV } from '../../services/storage';
+import { exportLogsAsPDF, shareLogsAsPDF } from '../../services/pdfReportGenerator';
 
 interface DashboardOverviewProps {
   activePatient: Patient | null;
@@ -129,12 +130,30 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
 
         <div className="flex items-center gap-2">
           <button
+            onClick={() => activePatient && shareLogsAsPDF(patientMeasurements, [activePatient], activePatient.id)}
+            className="flex items-center gap-1.5 bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs px-3.5 py-2.5 rounded-xl shadow-xs transition-all active:scale-95"
+            title="Share PDF Report via Native Share Sheet (Email, WhatsApp, AirDrop)"
+          >
+            <Share2 className="w-4 h-4" />
+            <span className="hidden sm:inline">Share PDF</span>
+          </button>
+
+          <button
             onClick={() => activePatient && exportLogsAsPDF(patientMeasurements, [activePatient], activePatient.id)}
             className="flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs px-3.5 py-2.5 rounded-xl border border-rose-200 shadow-xs transition-all"
             title="Download Doctor-Ready PDF Report"
           >
             <FileText className="w-4 h-4 text-rose-600" />
             <span className="hidden sm:inline">Export PDF</span>
+          </button>
+
+          <button
+            onClick={() => activePatient && shareLogsAsCSV(patientMeasurements, [activePatient])}
+            className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-xs transition-all"
+            title="Share CSV Spreadsheet via Native Share Sheet"
+          >
+            <Share2 className="w-4 h-4 text-teal-600" />
+            <span className="hidden sm:inline">Share CSV</span>
           </button>
 
           <button

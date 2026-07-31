@@ -261,6 +261,51 @@ export const exportLogsAsCSV = (measurements: BPMeasurement[], patients: Patient
   document.body.removeChild(link);
 };
 
+export const shareLogsAsCSV = async (measurements: BPMeasurement[], patients: Patient[]): Promise<boolean> => {
+  const patientMap = new Map(patients.map(p => [p.id, p.name]));
+  const headers = ['Patient Name', 'Date', 'Time', 'Systolic (mmHg)', 'Diastolic (mmHg)', 'Pulse (BPM)', 'Category', 'MAP (mmHg)', 'Pulse Pressure', 'Arm', 'Position', 'Tags', 'Notes'];
+  const rows = measurements.map(m => [
+    `"${patientMap.get(m.patientId) || 'Patient'}"`,
+    `"${m.date}"`,
+    `"${m.time}"`,
+    m.systolic,
+    m.diastolic,
+    m.pulse || '',
+    `"${m.category}"`,
+    m.meanArterialPressure,
+    m.pulsePressure,
+    `"${m.arm || ''}"`,
+    `"${m.bodyPosition || ''}"`,
+    `"${(m.tags || []).join('; ')}"`,
+    `"${(m.notes || '').replace(/"/g, '""')}"`
+  ]);
+
+  const csvContent = [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
+  const filename = `BPTracker_Clinical_Report_${new Date().toISOString().split('T')[0]}.csv`;
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const file = new File([blob], filename, { type: 'text/csv' });
+
+  if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+    try {
+      await navigator.share({
+        title: 'BPTracker Clinical CSV Report',
+        text: 'BP measurement logs exported from BPTracker PWA.',
+        files: [file],
+      });
+      return true;
+    } catch (err: any) {
+      if (err.name !== 'AbortError') {
+        console.error('Error sharing CSV file:', err);
+      }
+      return false;
+    }
+  } else {
+    // Fallback to direct download
+    exportLogsAsCSV(measurements, patients);
+    return false;
+  }
+};
+
 export const exportDataAsJSON = (
   patients: Patient[], 
   measurements: BPMeasurement[], 
