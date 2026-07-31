@@ -1,8 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { ClipboardList, Search, Plus, Download, Printer, Edit2, Trash2 } from 'lucide-react';
+import { ClipboardList, Search, Plus, Download, FileText, Printer, Edit2, Trash2 } from 'lucide-react';
 import type { Patient, BPMeasurement } from '../../types';
 import { evaluateBP } from '../../services/bpAdviceEngine';
 import { exportLogsAsCSV } from '../../services/storage';
+import { exportLogsAsPDF } from '../../services/pdfReportGenerator';
 
 interface MeasurementHistoryProps {
   measurements: BPMeasurement[];
@@ -38,10 +39,12 @@ export const MeasurementHistory: React.FC<MeasurementHistoryProps> = ({
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
         const patient = patientMap.get(m.patientId);
-        const patientName = patient ? patient.name.toLowerCase() : '';
-        const matchNotes = (m.notes || '').toLowerCase().includes(query);
+        const matchName = patient ? patient.name.toLowerCase().includes(query) : false;
+        const matchNotes = m.notes ? m.notes.toLowerCase().includes(query) : false;
         const matchTags = (m.tags || []).some(t => t.toLowerCase().includes(query));
-        return patientName.includes(query) || matchNotes || matchTags || m.category.toLowerCase().includes(query);
+        const matchCategory = m.category.toLowerCase().includes(query);
+
+        if (!matchName && !matchNotes && !matchTags && !matchCategory) return false;
       }
 
       return true;
@@ -59,6 +62,10 @@ export const MeasurementHistory: React.FC<MeasurementHistoryProps> = ({
 
   const handleExportCSV = () => {
     exportLogsAsCSV(filteredMeasurements, patients);
+  };
+
+  const handleExportPDF = () => {
+    exportLogsAsPDF(filteredMeasurements, patients, selectedPatientFilter === 'all' ? undefined : selectedPatientFilter);
   };
 
   const handlePrint = () => {
@@ -84,8 +91,18 @@ export const MeasurementHistory: React.FC<MeasurementHistoryProps> = ({
 
         <div className="flex flex-wrap items-center gap-2 no-print">
           <button
+            onClick={handleExportPDF}
+            className="flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold px-3.5 py-2 rounded-xl border border-rose-200 transition-all shadow-xs"
+            title="Download Doctor-Ready PDF Report"
+          >
+            <FileText className="w-4 h-4 text-rose-600" />
+            Export PDF
+          </button>
+
+          <button
             onClick={handleExportCSV}
             className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-200 transition-all"
+            title="Download CSV Spreadsheet"
           >
             <Download className="w-4 h-4 text-teal-600" />
             Export CSV

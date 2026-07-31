@@ -22,7 +22,7 @@ This PWA wasn't just built — it was **hyper-engineered** in pair-programming h
 - 🩺 **AHA/ACC Blood Pressure Advice Engine**: Classifies readings in real-time into Normal, Elevated, Stage 1, Stage 2, and Hypertensive Crisis with tailored clinical health advice.
 - 📊 **Interactive Analytics & Trends**: 7-day rolling averages, Mean Arterial Pressure (MAP), Pulse Pressure, and diurnal morning/evening variation tracking.
 - ⏰ **Medication & BP Measurement Alarms**: Set scheduled daily BP check alarms and medication dosage reminders.
-- 💾 **Doctor-Ready CSV & JSON Data Export**: Export full CSV logs formatted for physicians, or backup/restore complete app states via JSON.
+- 💾 **Doctor-Ready PDF & CSV Data Export**: Export formatted clinical PDF reports with 7-day averages & category breakdowns, download CSV spreadsheets for physicians, or backup/restore complete app states via JSON.
 - 🎨 **Clean Light Theme UI & Scalable SVG Icon**: Crisp accessible interface, fast touch controls, and high-DPI SVG vector icons.
 - 📲 **Installable Progressive Web App (PWA)**: Add to Home Screen on iOS, Android, and Desktop with offline access.
 - 🚀 **Cloudflare Pages Deployment**: Optimized SPA build configuration for global edge deployment on Cloudflare Pages.

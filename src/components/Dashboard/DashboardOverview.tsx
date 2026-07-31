@@ -8,10 +8,12 @@ import {
   User,
   ShieldAlert,
   ArrowUpRight,
-  CheckCircle2
+  CheckCircle2,
+  FileText
 } from 'lucide-react';
 import type { Patient, BPMeasurement, BPReminder } from '../../types';
 import { evaluateBP } from '../../services/bpAdviceEngine';
+import { exportLogsAsPDF } from '../../services/pdfReportGenerator';
 
 interface DashboardOverviewProps {
   activePatient: Patient | null;
@@ -124,6 +126,15 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => activePatient && exportLogsAsPDF(patientMeasurements, [activePatient], activePatient.id)}
+            className="flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs px-3.5 py-2.5 rounded-xl border border-rose-200 shadow-xs transition-all"
+            title="Download Doctor-Ready PDF Report"
+          >
+            <FileText className="w-4 h-4 text-rose-600" />
+            <span className="hidden sm:inline">Export PDF</span>
+          </button>
+
           <button
             onClick={onOpenAddMeasurement}
             className="flex items-center gap-1.5 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-md shadow-rose-500/20 active:scale-95 transition-all"
