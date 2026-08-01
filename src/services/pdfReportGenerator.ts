@@ -116,30 +116,30 @@ export const createPDFDocument = (
   const statsTableY = (doc as any).lastAutoTable.finalY || 70;
   let nextSectionY = statsTableY + 8;
 
-  // 4. Warm & Friendly Clinical Advice Box
-  if (latest) {
-    const advice = evaluateBP(latest.systolic, latest.diastolic);
-    const boxY = statsTableY + 5;
-    
-    // Calculate required box height based on summary text wrapping & steps count
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8.5);
-    const summaryLines = doc.splitTextToSize(advice.summaryAdvice, 174);
-    const textHeight = summaryLines.length * 4;
-    const stepsHeight = advice.detailedSteps.length * 4;
-    const totalBoxHeight = 14 + textHeight + stepsHeight;
+    // 4. Clinical Advice Box
+    if (latest) {
+      const advice = evaluateBP(latest.systolic, latest.diastolic);
+      const boxY = statsTableY + 5;
+      
+      // Calculate required box height based on summary text wrapping & steps count
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      const summaryLines = doc.splitTextToSize(advice.summaryAdvice, 174);
+      const textHeight = summaryLines.length * 4;
+      const stepsHeight = advice.detailedSteps.length * 4;
+      const totalBoxHeight = 14 + textHeight + stepsHeight;
 
-    // Draw Rose Callout Card
-    doc.setFillColor(255, 241, 242); // Rose-50
-    doc.setDrawColor(254, 205, 211); // Rose-200
-    doc.setLineWidth(0.3);
-    doc.roundedRect(14, boxY, 182, totalBoxHeight, 3, 3, 'FD');
+      // Draw Rose Callout Card
+      doc.setFillColor(255, 241, 242); // Rose-50
+      doc.setDrawColor(254, 205, 211); // Rose-200
+      doc.setLineWidth(0.3);
+      doc.roundedRect(14, boxY, 182, totalBoxHeight, 3, 3, 'FD');
 
-    // Title
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9.5);
-    doc.setTextColor(159, 18, 57); // Rose-900
-    doc.text(`Friendly Health Analysis: ${advice.category} Range`, 18, boxY + 6);
+      // Title
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
+      doc.setTextColor(159, 18, 57); // Rose-900
+      doc.text(`Clinical Health Analysis: ${advice.category} Range`, 18, boxY + 6);
 
     // Warm Advice Text
     doc.setFont('helvetica', 'normal');
