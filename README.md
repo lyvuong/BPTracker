@@ -105,7 +105,7 @@ Log new measurements with instant clinical feedback:
 View a comprehensive snapshot of active profile vitals:
 - **Latest Measurement**: Displays your most recent reading with color-coded AHA category badges.
 - **7-Day Rolling Average**: Automatically calculates your 7-day average blood pressure and pulse.
-- **Friendly Health Advice**: Provides actionable clinical guidance and recommended lifestyle steps based on AHA/ACC guidelines.
+- **Clinical Health Advice**: Provides actionable clinical guidance and recommended lifestyle steps based on AHA/ACC guidelines.
 - **Hypertensive Crisis Warning**: Prominently alerts you if a reading exceeds 180/120 mmHg.
 
 ![Dashboard Overview](docs/screenshots/dashboard.png)

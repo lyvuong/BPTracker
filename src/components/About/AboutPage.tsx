@@ -79,7 +79,7 @@ export const AboutPage: React.FC = () => {
             </h1>
 
             <p className="text-sm text-slate-600 max-w-xl leading-relaxed">
-              A Progressive Web Application for tracking blood pressure measurements for yourself or family members, featuring interactive trend analytics and automated friendly clinical advice based on AHA/ACC guidelines.
+              A Progressive Web Application for tracking blood pressure measurements for yourself or family members, featuring interactive trend analytics and automated clinical health advice based on AHA/ACC guidelines.
             </p>
           </div>
 

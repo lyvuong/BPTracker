@@ -288,7 +288,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-slate-900">Friendly Health Advice & Recommended Steps</h2>
+                <h2 className="text-lg font-bold text-slate-900">Clinical Health Advice & Recommended Steps</h2>
                 <p className="text-xs text-slate-500">Based on AHA/ACC clinical blood pressure category evaluation.</p>
               </div>
             </div>
