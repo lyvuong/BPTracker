@@ -1,17 +1,66 @@
 import React from 'react';
-import { 
-  HeartPulse, 
-  Code2, 
-  Cpu, 
-  GitBranch, 
-  Globe, 
-  CheckCircle2, 
-  Activity, 
-  ExternalLink
+import {
+  HeartPulse,
+  Code2,
+  Cpu,
+  GitBranch,
+  Globe,
+  CheckCircle2,
+  Activity,
+  ExternalLink,
+  Sparkles,
+  Users,
+  ShieldCheck,
+  Bell,
+  FileSpreadsheet,
+  RotateCcw,
+  Tag,
+  Calendar,
+  Server
 } from 'lucide-react';
+import { APP_VERSION, BUILD_DATE, BUILD_HASH, DISPLAY_VERSION } from '../../utils/version';
 
 export const AboutPage: React.FC = () => {
   const currentYear = new Date().getFullYear();
+
+  const KEY_FEATURES = [
+    {
+      icon: Users,
+      color: 'bg-rose-100 text-rose-700 border-rose-200',
+      title: 'Multi-Patient Health Profiles',
+      desc: 'Track yourself and family members side-by-side, each with an isolated measurement history and reminder schedule.'
+    },
+    {
+      icon: Activity,
+      color: 'bg-pink-100 text-pink-700 border-pink-200',
+      title: 'Interactive Trend Analytics',
+      desc: 'Visualize systolic/diastolic trends, pulse pressure, and mean arterial pressure over time with interactive charts.'
+    },
+    {
+      icon: ShieldCheck,
+      color: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+      title: 'AHA/ACC Clinical Advice Engine',
+      desc: 'Automatic BP categorization and personalized health guidance based on official American Heart Association guidelines.'
+    },
+    {
+      icon: Bell,
+      color: 'bg-amber-100 text-amber-700 border-amber-200',
+      title: 'Measurement Reminders',
+      desc: 'Schedule recurring reminders so readings stay consistent and no check-in gets missed.'
+    },
+    {
+      icon: FileSpreadsheet,
+      color: 'bg-purple-100 text-purple-700 border-purple-200',
+      title: 'PDF & CSV Physician Reports',
+      desc: 'Generate polished PDF reports and CSV exports to share your BP history with your doctor, with native mobile sharing support.'
+    },
+    {
+      icon: RotateCcw,
+      color: 'bg-cyan-100 text-cyan-700 border-cyan-200',
+      title: 'Offline-First PWA',
+      desc: 'Install as an app and keep logging measurements without a connection; data is stored locally via IndexedDB/LocalStorage.'
+    }
+  ];
 
   const TECH_STACK = [
     { name: 'Antigravity AI', category: 'AI Pair Programmer', desc: 'Google DeepMind Agentic Coding Platform 🚀' },
@@ -69,7 +118,7 @@ export const AboutPage: React.FC = () => {
                 Personal & Family Edition
               </span>
               <span className="text-xs font-mono font-semibold text-rose-700 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full">
-                v1.0.0 Stable
+                v{APP_VERSION} Stable
               </span>
             </div>
 
@@ -83,9 +132,22 @@ export const AboutPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex flex-col items-center sm:items-end gap-2 shrink-0">
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-center">
-              <span className="text-[11px] text-slate-500 uppercase font-extrabold tracking-wider block">Environment</span>
+          <div className="flex flex-row sm:flex-col items-center sm:items-end gap-3 shrink-0">
+            <div className="p-3.5 sm:p-4 bg-slate-50 rounded-2xl border border-slate-200 text-center min-w-[140px]">
+              <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider block">App Version</span>
+              <span className="text-sm font-bold text-slate-900 font-mono flex items-center gap-1.5 justify-center mt-0.5">
+                <Tag className="w-3.5 h-3.5 text-rose-600" />
+                v{APP_VERSION}
+              </span>
+              {BUILD_HASH && (
+                <span className="text-[10px] text-rose-700 font-mono font-bold block mt-1 bg-rose-50 rounded-md px-1.5 py-0.5 border border-rose-200">
+                  build #{BUILD_HASH}
+                </span>
+              )}
+            </div>
+
+            <div className="p-3.5 sm:p-4 bg-slate-50 rounded-2xl border border-slate-200 text-center min-w-[140px]">
+              <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider block">Environment</span>
               <span className="text-sm font-bold text-emerald-700 font-mono flex items-center gap-1.5 justify-center mt-0.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 Cloudflare Edge
@@ -155,7 +217,49 @@ export const AboutPage: React.FC = () => {
                 ⚡ Zero-Gravity Speed
               </span>
             </div>
+
+            <div className="bg-gradient-to-r from-slate-50 to-rose-50 p-3.5 rounded-xl border border-slate-200 mt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5 flex-wrap">
+                <span>🧠 Also maintained with:</span>
+                <span className="font-extrabold text-rose-600 font-mono">Claude Code by Anthropic</span>
+              </span>
+              <span className="text-[11px] font-black text-slate-600 bg-white px-2.5 py-0.5 rounded-md border border-slate-200 shadow-xs font-mono self-start sm:self-auto shrink-0">
+                🛠️ Agentic CLI Engineering
+              </span>
+            </div>
           </div>
+        </div>
+      </div>
+
+      {/* Key Features Grid */}
+      <div className="space-y-4">
+        <div className="flex items-center gap-2">
+          <div className="p-2 bg-rose-100 text-rose-700 rounded-xl border border-rose-200">
+            <Sparkles className="w-5 h-5" />
+          </div>
+          <h2 className="text-xl font-black text-slate-900 font-display">Key Capabilities & Features</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {KEY_FEATURES.map((feature, idx) => {
+            const Icon = feature.icon;
+            return (
+              <div
+                key={idx}
+                className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:border-slate-300 transition-all space-y-2.5"
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`p-2.5 rounded-xl border ${feature.color}`}>
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-bold text-sm text-slate-900">{feature.title}</h3>
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {feature.desc}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -210,11 +314,55 @@ export const AboutPage: React.FC = () => {
         </div>
       </div>
 
+      {/* Version & Release Specifications */}
+      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-4">
+        <div className="flex items-center gap-2">
+          <div className="p-2 bg-rose-100 text-rose-700 rounded-xl border border-rose-200">
+            <Tag className="w-5 h-5" />
+          </div>
+          <h2 className="text-xl font-black text-slate-900 font-display">Version & Release Specifications</h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
+            <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider block">App Version</span>
+            <span className="text-sm font-extrabold text-rose-700 font-mono flex items-center gap-1.5">
+              <Tag className="w-3.5 h-3.5 text-rose-600" />
+              v{APP_VERSION}
+            </span>
+          </div>
+
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
+            <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider block">Build / Commit</span>
+            <span className="text-sm font-extrabold text-slate-900 font-mono flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-rose-600" />
+              {BUILD_HASH ? `#${BUILD_HASH}` : 'Production'}
+            </span>
+          </div>
+
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
+            <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider block">Build Date</span>
+            <span className="text-sm font-extrabold text-slate-900 font-mono flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-rose-600" />
+              {BUILD_DATE}
+            </span>
+          </div>
+
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
+            <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider block">Storage Engine</span>
+            <span className="text-sm font-extrabold text-slate-900 font-mono flex items-center gap-1.5">
+              <Server className="w-3.5 h-3.5 text-rose-600" />
+              IndexedDB + Local
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* Footer Info & Copyright */}
       <div className="bg-white p-6 rounded-2xl border border-slate-200 text-center space-y-2 shadow-xs">
         <div className="flex items-center justify-center gap-2 text-xs font-bold text-slate-700">
           <Globe className="w-4 h-4 text-rose-600" />
-          <span>BPTracker Personal & Family Health Application</span>
+          <span>BPTracker Progressive Web Application • {DISPLAY_VERSION}</span>
         </div>
         <p className="text-xs text-slate-500">
           © {currentYear} Ly Vuong. All rights reserved. Open source under MIT license.
